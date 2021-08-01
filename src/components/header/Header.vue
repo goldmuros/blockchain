@@ -1,7 +1,9 @@
 <template>
-  <b-navbar>
+  <b-navbar :transparent="true">
+    <template #start> </template>
     <template #end>
-      <div class="coins__div">
+      <div class="tab-container">
+        <!-- <div class="coins-display"> -->
         <b-navbar-item tag="a" class="coins-display">
           <!-- <b-image class="img" alt="Ethix"></b-image> -->
           <span>{{ totalValueEthix }}</span>
@@ -12,16 +14,19 @@
           <span>{{ totalValueEther }}</span>
           <span>Ether</span>
         </b-navbar-item>
+        <!-- </div> -->
+        <b-navbar-item tag="a" class="connect">
+          <!-- <b-image class="img" alt="Ethix"></b-image> -->
+          <div class="coins-display">
+            <template v-if="connected">
+              <DataConnection />
+            </template>
+            <template v-else>
+              <b-button class="is-primary" @click="connect">Connect</b-button>
+            </template>
+          </div>
+        </b-navbar-item>
       </div>
-      <b-navbar-item tag="a" class="wallet-display">
-        <!-- <b-image class="img" alt="Ethix"></b-image> -->
-        <template v-if="connected">
-          <DataConnection />
-        </template>
-        <template v-else>
-          <b-button class="is-primary" @click="connect">Connect</b-button>
-        </template>
-      </b-navbar-item>
     </template>
   </b-navbar>
 </template>
@@ -66,32 +71,55 @@ export default class Header extends Vue {
   justify-content: space-between;
 }
 
-.coins-display {
+.connect {
   display: flex;
-  align-items: center;
   justify-content: center;
-  position: relative;
-  height: auto;
-  width: auto;
-  border-radius: 0;
-  min-width: 100px;
-  background: none;
-  padding: 0 0 0 25px;
+  margin-right: -50px;
+  width: 200px;
+  background: #2eee68;
+  border-radius: 0 0 0 36px;
+  // transform: skew(23deg);
+  height: 100%;
 }
 
-.coins-display::before {
-  box-sizing: inherit;
-  content: "";
-  position: absolute;
-  display: block;
-  top: 0;
-  right: -50px;
-  height: 100%;
-  width: calc(100% + 50px);
+.coins-display {
+  // display: inline;
+  // align-items: center;
+  // justify-content: center;
+  // position: relative;
+  // height: auto;
+  // width: auto;
+  // border-radius: 0;
+  // min-width: 100px;
+  // background: none;
+  // padding: 0 0 0 25px;
+  transform: skew(-23deg);
+}
+
+// .coins-display1 {
+// box-sizing: inherit;
+// // content: "";
+// // position: absolute;
+// // display: block;
+// top: 0;
+// // right: -50px;
+// height: 100%;
+// // width: calc(100% + 50px);
+// width: 500px;
+// background: #f3f5f7;
+// border-radius: 0 0 0 36px;
+// transform: skew(23deg);
+// }
+
+.tab-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 500px;
   background: #f3f5f7;
   border-radius: 0 0 0 36px;
   transform: skew(23deg);
-  z-index: 0;
+  height: 100%;
 }
 
 // .img {
