@@ -1,5 +1,6 @@
 import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
 import { IWallet } from "@/types/wallet-types";
+import * as wallet from "@/services/wallet";
 
 export interface WalletState {
   wallet: IWallet;
@@ -15,6 +16,12 @@ export class WalletStore extends VuexModule implements WalletState {
     connected: false,
   };
 
+  public web3: any = {};
+
+  get getAddress(): string {
+    return this.wallet.address;
+  }
+
   get getDataWallet(): IWallet {
     return this.wallet;
   }
@@ -24,17 +31,26 @@ export class WalletStore extends VuexModule implements WalletState {
   }
 
   @Mutation
-  setConnection(wallet: IWallet): void {
-    this.wallet = wallet;
+  setWeb3(web3: any): void {
+    this.wallet.address = web3.currentProvider.selectedAddress;
+    this.wallet.connected = true;
+  }
+
+  @Mutation
+  setAccount(account: string): void {
+    this.wallet.address = account;
   }
 
   @Action
   async connect(): Promise<void> {
-    // await this.clearCart();
-    const wallet: IWallet = {
-      address: "8943xGh098",
-      connected: true,
-    };
-    this.setConnection(wallet);
+    const web3 = await wallet.connect();
+    this.setWeb3(web3);
+  }
+
+  @Action
+  async getAccount(): Promise<void> {
+    const account = await wallet.account();
+
+    this.setAccount(account);
   }
 }

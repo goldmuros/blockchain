@@ -19,6 +19,9 @@
           <!-- <b-image class="img" alt="Ethix"></b-image> -->
           <div class="coins-display">
             <template v-if="connected">
+              <div>
+                {{ address }}
+              </div>
               <DataConnection />
             </template>
             <template v-else>
@@ -51,6 +54,10 @@ export default class Header extends Vue {
     return this.walletStore.getConnected;
   }
 
+  get address(): string {
+    return this.walletStore.getAddress;
+  }
+
   public get totalValueEthix(): number {
     return 0;
   }
@@ -60,7 +67,8 @@ export default class Header extends Vue {
   }
 
   public async connect(): Promise<void> {
-    this.walletStore.connect();
+    await this.walletStore.connect();
+    // await this.walletStore.getAccount();
   }
 }
 </script>
@@ -78,38 +86,12 @@ export default class Header extends Vue {
   width: 200px;
   background: #2eee68;
   border-radius: 0 0 0 36px;
-  // transform: skew(23deg);
   height: 100%;
 }
 
 .coins-display {
-  // display: inline;
-  // align-items: center;
-  // justify-content: center;
-  // position: relative;
-  // height: auto;
-  // width: auto;
-  // border-radius: 0;
-  // min-width: 100px;
-  // background: none;
-  // padding: 0 0 0 25px;
   transform: skew(-23deg);
 }
-
-// .coins-display1 {
-// box-sizing: inherit;
-// // content: "";
-// // position: absolute;
-// // display: block;
-// top: 0;
-// // right: -50px;
-// height: 100%;
-// // width: calc(100% + 50px);
-// width: 500px;
-// background: #f3f5f7;
-// border-radius: 0 0 0 36px;
-// transform: skew(23deg);
-// }
 
 .tab-container {
   display: flex;
