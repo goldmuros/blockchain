@@ -16,6 +16,7 @@ export class WalletStore extends VuexModule implements WalletState {
     connected: false,
   };
 
+  // eslint-disable-next-line
   public web3: any = {};
 
   get getAddress(): string {
@@ -31,9 +32,15 @@ export class WalletStore extends VuexModule implements WalletState {
   }
 
   @Mutation
+  // eslint-disable-next-line
   setWeb3(web3: any): void {
     this.wallet.address = web3.currentProvider.selectedAddress;
     this.wallet.connected = true;
+  }
+
+  @Mutation
+  setDisconnect(): void {
+    this.wallet.connected = false;
   }
 
   @Mutation
@@ -45,6 +52,12 @@ export class WalletStore extends VuexModule implements WalletState {
   async connect(): Promise<void> {
     const web3 = await wallet.connect();
     this.setWeb3(web3);
+  }
+
+  @Action
+  async disconnect(): Promise<void> {
+    // const web3 = await wallet.connect();
+    this.setDisconnect();
   }
 
   @Action

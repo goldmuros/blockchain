@@ -1,28 +1,27 @@
 <template>
   <b-navbar :transparent="true">
-    <template #start> </template>
+    <template #start>
+      <img class="logo" />
+    </template>
     <template #end>
       <div class="tab-container">
-        <!-- <div class="coins-display"> -->
         <b-navbar-item tag="a" class="coins-display">
-          <!-- <b-image class="img" alt="Ethix"></b-image> -->
           <span>{{ totalValueEthix }}</span>
           <span>Ethix</span>
         </b-navbar-item>
         <b-navbar-item tag="a" class="coins-display">
-          <!-- <b-image class="img" alt="Ethix"></b-image> -->
           <span>{{ totalValueEther }}</span>
           <span>Ether</span>
         </b-navbar-item>
-        <!-- </div> -->
         <b-navbar-item tag="a" class="connect">
-          <!-- <b-image class="img" alt="Ethix"></b-image> -->
           <div class="coins-display">
             <template v-if="connected">
-              <div>
-                {{ address }}
+              <div class="coins__div">
+                <span class="wallet-address text-blue-title">
+                  {{ address }}
+                </span>
+                <DataConnection />
               </div>
-              <DataConnection />
             </template>
             <template v-else>
               <b-button class="is-primary" @click="connect">Connect</b-button>
@@ -68,7 +67,6 @@ export default class Header extends Vue {
 
   public async connect(): Promise<void> {
     await this.walletStore.connect();
-    // await this.walletStore.getAccount();
   }
 }
 </script>
@@ -104,7 +102,25 @@ export default class Header extends Vue {
   height: 100%;
 }
 
-// .img {
-//   background-image: url("~@/assets/img/ethix.svg");
-// }
+.logo {
+  position: absolute;
+  width: 207px;
+  height: 40px;
+  left: 28px;
+  top: 21px;
+  background: url("../../assets/logo.png");
+  object-fit: cover;
+}
+
+.wallet-address {
+  position: absolute;
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  color: #062f4f;
+}
 </style>

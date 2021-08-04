@@ -1,14 +1,15 @@
 import Web3 from "web3";
+
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 declare let window: any;
 
-const getAccount = async () => {
+const getAccount = async (): Promise<string> => {
   const accounts = await window.ethereum.request({
     method: "eth_requestAccounts",
   });
   return accounts[0];
 };
-
-const getWeb3 = async () => {
+const getWeb3 = async (): Promise<any> => {
   if (hasWindowEthereum()) {
     try {
       // Si se tiene connexion con Metamask
@@ -23,7 +24,7 @@ const getWeb3 = async () => {
   }
 
   if (hasWindowWeb3()) {
-    // SI se tiene otras wallets o una version mas antigua de Metamask
+    // Si se tiene otras wallets o una version mas antigua de Metamask
     return window.web3;
   }
 };
