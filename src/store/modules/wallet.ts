@@ -1,5 +1,5 @@
 import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
-import { IWallet } from "@/types/wallet-types";
+import { IWallet } from "@/types/types";
 import * as wallet from "@/services/wallet";
 
 export interface WalletState {

@@ -1,7 +1,7 @@
 <template>
   <b-navbar :transparent="true">
     <template #start>
-      <img class="logo" />
+      <b-image class="logo" />
     </template>
     <template #end>
       <div class="tab-container">
@@ -103,12 +103,13 @@ export default class Header extends Vue {
 }
 
 .logo {
+  border: 1px solid black;
   position: absolute;
   width: 207px;
   height: 40px;
   left: 28px;
   top: 21px;
-  background: url("../../assets/logo.png");
+  background-image: url("../../assets/logo.png");
   object-fit: cover;
 }
 

@@ -6,8 +6,17 @@
   color: #385972;
 }
 
+.back-blue {
+  background-color: #062f4f;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
 .container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
